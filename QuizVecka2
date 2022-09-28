@@ -1,0 +1,112 @@
+# questions = Dictionary. Dictionaries are the data structures that hold key-value pairs.
+# Each row (question) is a key, and all questions has an associatied value (the correct answer).
+questions = {"What kind of programming language is Python?: ": "B",
+            "What year was Python created?: ": "C",
+            "What does the function len() do?: ": "C",
+            "What type of character do you use to write a comment in Python?: ": "B",
+            "Do you need to declare data type for variables in Python?: ": "A", 
+            "What does the = (single-equal sign) in Python do?: ": "B",
+            "What kind of data type is True and False in Python?: ": "B",
+            "Which function takes user input in Python?: ": "C",
+            "What are the keyword for declaring a function in Python?: ": "A",
+            "Which of the following answers correspond to a floating number?: ": "A"}
+
+# options = Collection to hold all of the different possible answers.
+# Implemented with an 2D array, you can think of a 2D array as a list of lists. When arranged into a grid, each row represents a single list.
+# 2D arrays gives you the coordinates of the items in a grid in terms of a row number followed by a column number.
+# Each array corresponds to a key-value pair within the dictionary of questions.
+options = [["A. Functional", "B. Object-Oriented", "C. Imperative"],
+          ["A. 1987", "B. 1989", "C. 1991"],
+          ["A. Returns a string", "B. Returns a float", "C. Return a integer value which indicates the number of items in an object"],
+          ["A. &", "B. #", "C. %"],
+          ["A. No, not necessary", "B. Yes, It's necessary", "C. Sometimes"],
+          ["A. Tests whether two things have the same value", "B. Assigns the value on the right to a variable on the left", "C. None of the above"],
+          ["A. Intiger", "B. Boolean", "C. String"],
+          ["A. print()", "B. console.readline()", "C. input()"],
+          ["A. def()", "B. if()", "C. for()"],
+          ["A. 1.443", "B. 1443", "C. (1443)"]]
+
+#--------------------------------------------------
+
+def new_game(): # Main function for the quiz
+
+    answers = [] # Array named answer, that holds all of the different possible answers.
+    correct_answers = 0 # index that counts the number of correct answers.
+    question_num = 1 # index for keeping track of questions.
+
+    # For-loop that displays all of the questions within the dictionary of questions.
+    for key in questions:
+        print() # Printing a space in between the questions. 
+        print("---------------------------")
+        print (key)
+    # Displays the different options in the 2D array for each question with a nested for-loop and a index [question_num] to keep track of which array belongs to which question.
+        for i in options[question_num-1]: # First element in a array has index = 0, therefore we need index-1.
+            print(i)
+
+        print()
+
+        answer = input("Enter A, B or C: ") # Prompt for user input.
+        answer = answer.upper() # Because strings are case sensetive and if the user eg. types in "a" instead of "A", this function handles that and give them correct answer anyway. 
+        answers.append(answer) # compares the users answers to the correct answers. Bifogar (appends) användarens svar till vår lista av svar så att vi kan jämföra det i slutet av spelet.
+        
+        correct_answers += check_answer(questions.get(key), answer) # checks if the users answer is the correct one and increments the number of correct answers to the variable correct_answers.
+        question_num += 1 # incrementing the question number after each iteration in the for-loop.
+    
+    display_score(correct_answers, answers) # Displays score
+
+#--------------------------------------------------
+
+def check_answer(correct_answer, answer): # Function to check if the users answer is the correct one.
+    
+    if correct_answer == answer:
+        print ("CORRECT!")
+        return 1 # If the answer is correct, adding 1 point.
+    else:
+        print("WRONG!")
+        return 0 # If the answer is wrong, adding a 0 points.
+
+#--------------------------------------------------
+
+def display_score(correct_answers, answers): # Function for displaying the users answers and the correct ones
+    print()
+    print("--------------------")
+    print("RESULTS")
+
+    print("Your answers: ", end="") # end="" because we want the answer that the user types in to be on the same line.
+    for i in answers: # Displays all of the users answers within the array "Answers".
+        print(i, end=" ")
+    
+    print()
+    
+    print("Correct answers: ", end="")
+    for i in questions: # Displays all of the correct answers within the dictionary.
+        print(questions.get(i), end=" ")
+    
+    print()
+
+    score = correct_answers
+    print(f"Your score is: {score}" + " " + "out of 10")
+
+#--------------------------------------------------
+
+def play_again(): # Function that lets the player decide if he wants to play again.
+    print()
+    response = input("Do you want to play again? (yes or no): ")
+    response = response.upper()
+
+    if response == "YES":
+        return True
+    else:
+        return False
+
+#--------------------------------------------------
+
+new_game() # Calls the new_game function to begin a new game.
+
+
+while play_again(): # As long as the player answers YES to the question "Do you want to play again?" the game will restart with this wile-loop.
+    new_game()
+
+print("Good Byeeeeeeeee!") # If the player chooses NO to the question "Do you want to play again?", the while-loop will exit and "God Bye!" will be printed on the console.
+print()
+
