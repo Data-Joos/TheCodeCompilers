@@ -1,0 +1,93 @@
+#----------------------
+def new_game():
+    
+    guesses = []
+    correct_guesses = 0
+    question_num = 1
+
+    for key in questions:
+        print("----------------------")
+        print(key)
+        for i in options[question_num -1]:
+            print(i)
+        guess = input("Enter (A, B or C): ")
+        guess = guess.upper()
+        guesses.append(guess)
+
+        correct_guesses += check_answer(questions.get(key),guess)
+        question_num += 1    
+
+    display_score(correct_guesses, guesses)    
+#----------------------
+def check_answer(answer, guess):
+    
+    if answer == guess:
+        print("That's correct!")
+        return 1
+    else:
+        print("Wrong answer!")
+        return 0  
+
+#----------------------
+def display_score(correct_guesses, guesses):
+    print("---------------------------")
+    print("Result")
+    print("---------------------------")
+    print("Answers: ", end="")
+    for i in questions:
+        print(questions.get(i), end=" ")
+    print()    
+
+    print("Guesses: ", end=" ")
+    for i in guesses:
+        print(i, end=" ")
+    print()    
+
+    score = int((correct_guesses/len(questions)) * 100)
+    print("Your score is: "+str(score)+"%")
+#----------------------
+def play_again():
+    
+    response = input("Do you want to play again? (yes or no): ")
+    response = response.upper()
+
+    if response == "YES":
+        return True
+    else:
+        return False    
+#----------------------
+
+questions = {
+    "What type of language is Python?: ":"A",
+    "Who invented Python?: ": "B",
+    "Why is it called Python?: ": "C",
+    "What year was Python created?: ": "B",
+    "What class is plain text within '' marks?: ": "C",
+    "What class is a whole number?: ": "A",
+    "What class is a number with a decimal point?: ": "A",
+    "What class can be defined with a 'True' or 'False' statement?: ": "B",
+    "What kind of 'level' language is Python?: ": "C",
+    "Do you separately have to compile a Python program?: ": "B",
+
+    
+
+}
+
+options = [["A. Interpreted", "B. Compiled", "C. Low level"],
+["A. Nikola Tesla", "B. Guido van Rossum", "C. Steve Jobs"],
+["A. Because its creator liked snakes", "B. Because it's cool", "C. It's from the comedy group Monty Python"],
+["A. 1945", "B. 1991", "C. 1989"],
+["A. Text", "B. Print", "C. String"],
+["A. Integer", "B. Value", "C. Number"],
+["A. Float", "B. Decimal", "C. State"],
+["A. Else", "B. Boolean", "C. Lie"],
+["A. Low level", "B. Hard level", "C. High level"],
+["A. Yes", "B. No", "C. Maybe"]]
+
+
+new_game()
+
+while play_again():
+    new_game()
+
+print("Goodbye!")    
