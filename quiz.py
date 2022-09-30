@@ -1,5 +1,5 @@
 print("Hi and welcome to the quiz of Code Compilers. Good luck!")
-player_name = input("Input your name: ")
+player_name = input("Input your name!: ")
 player_score = 0
 
 print('Q 1: What does the following line of code print?\nprint("Rabbit")\na: Hello\nb: Rabbit\nc: Error ')
