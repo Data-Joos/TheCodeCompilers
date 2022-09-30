@@ -47,7 +47,7 @@ Answer9 = input("Answer: ")
 if Answer9 == "a":
     player_score += 1
 
-print('Q 10: What does the following lines of code print?\nx = 5\ny = "I am "\print(y, x)\na: Error\nb: I am 5\nc: x + y')
+print('Q 10: What does the following lines of code print?\nx = 5\ny = "I am "\nprint(y, x)\na: Error\nb: I am 5\nc: x + y')
 Answer10 = input("Answer: ")
 if Answer10 == "b":
     player_score += 1
